@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.amex.sms.school.student.dao.StudentDao">
+    <resultMap id="resultMap" type="com.amex.sms.school.student.entity.Student">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="email" column="email"/>
+    </resultMap>
+    <sql id="columns">
+        select t1.id,t1.name,t1.email from student t1
+    </sql>
+    <select id="query" parameterType="com.amex.sms.school.service.query.StudentQuery" resultMap="resultMap">
+        <include refid="columns"/>
+    </select>
+    <insert id="batchAdd" parameterType="com.amex.sms.school.service.dto.StudentDTO">insert into student(id,name,email)
+        values
+        <foreach collection="list" item="item" open="" close="" separator=",">(#{item.id},#{item.name},#{item.email})
+        </foreach>
+    </insert>
+</mapper>
