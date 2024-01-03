@@ -27,7 +27,7 @@ try{
             branch: 'main'
      }
      stage('SonarQube analysis') {
-         withSonarQubeEnv(credentialsId: 'SONAR', installationName: 'My SonarQube Server') { // You can override the credential to be used
+         withSonarQubeEnv(credentialsId: 'SONAR', installationName: 'sonarcube') { // You can override the credential to be used
            sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.7.0.1746:sonar'
          }
        }
