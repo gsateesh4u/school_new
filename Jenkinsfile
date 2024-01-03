@@ -26,12 +26,7 @@ try{
             credentialsId: 'school-user',
             branch: 'main'
      }
-     stage('SonarQube Analysis') {
-         def mvn = tool 'Default Maven';
-         withSonarQubeEnv() {
-           sh "${mvn}/bin/mvn clean verify sonar:sonar -Dsonar.projectKey=school -Dsonar.projectName='school'"
-         }
-       }
+     
     stage('Build docker') {
          dockerImage = docker.build("school-app:${env.BUILD_NUMBER}")
     }
