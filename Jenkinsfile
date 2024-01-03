@@ -26,7 +26,12 @@ try{
             credentialsId: 'school-user',
             branch: 'main'
      }
-     
+     stage('SonarQube analysis') {
+         def scannerHome = tool 'SonarScanner 4.0';
+         withSonarQubeEnv('My SonarQube Server') { // If you have configured more than one global server connection, you can specify its name
+           sh "${scannerHome}/bin/sonar-scanner"
+         }
+       }
     stage('Build docker') {
          dockerImage = docker.build("school-app:${env.BUILD_NUMBER}")
     }
